@@ -19,9 +19,9 @@
         <a href="/tambahpegawai" type="button" class="btn btn-success">Tambah Data +</a>
         <div class="row">
             @if ($message = Session::get('success'))
-            <div class="alert alert-success mt-4 mb-4" role="alert">
-              {{$message}}
-              </div>
+                <div class="alert alert-success mt-4 mb-4" role="alert">
+                    {{ $message }}
+                </div>
             @endif
             <table class="table table-striped">
                 <thead>
@@ -40,21 +40,23 @@
                         $no = 1;
                     @endphp
                     @foreach ($data as $item)
-                    <tr>
-                        <th scope="item">{{$no++}}</th>
-                        <td>{{$item->nama}}</td> 
-                        <td>
-                            <img src="{{asset('fotopegawai/'.$item->foto)}}" alt="fotopegawai" style="width: 40px;">
-                        </td> 
-                        <td>{{$item->jeniskelamin}}</td>
-                        <td>0{{$item->notelpon}}</td>
-                        <td>{{$item->created_at->format('D M Y')}}</td>
-                        {{-- ->diffForHumans() --}}
-                        <td>
-                            <a href="/tampilkandata/{{$item->id}}" class="btn btn-info">Edit</a>
-                            <a href="/deletedata/{{$item->id}}" class="btn btn-danger">Delete</a>
-                        </td>
-                    </tr>
+                        <tr>
+                            <th scope="item">{{ $no++ }}</th>
+                            <td>{{ $item->nama }}</td>
+                            <td>
+                                <img src="{{ asset('fotopegawai/' . $item->foto) }}" alt="fotopegawai"
+                                    style="width: 40px;">
+                            </td>
+                            <td>{{ $item->jeniskelamin }}</td>
+                            <td>0{{ $item->notelpon }}</td>
+                            <td>{{ $item->created_at->format('D M Y') }}</td>
+                            {{-- ->diffForHumans() --}}
+                            <td>
+                                <a href="/tampilkandata/{{ $item->id }}" class="btn btn-info">Edit</a>
+                                {{-- wajib cantumkan data-id dan inisiasi class atau id nya --}}
+                                <a href="#" class="btn btn-danger delete" data-id="{{ $item->id }}"  data-nama="{{ $item->nama }}">Delete</a>
+                            </td>
+                        </tr>
                     @endforeach
                 </tbody>
             </table>
@@ -67,7 +69,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <!-- Option 2: Separate Popper and Bootstrap JS -->
     <!--
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
@@ -78,5 +81,32 @@
     </script>
     -->
 </body>
+<script>
+    $('.delete').click(function(){
+
+        var pegawaiid = $(this).attr('data-id');
+        var nama = $(this).attr('data-nama');
+
+        swal({
+            title: "Yakin ?",
+            text: "Kamu akan menghapus data pegawai dengan nama "+nama+" ",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+            if (willDelete) {
+                window.location = "/deletedata/ "+pegawaiid+""
+                swal("data berhasil dihapus!", {
+                    icon: "success",
+                });
+            } else {
+                swal("data tidak jadi dihapus");
+            }
+        });
+    });
+
+
+</script>
 
 </html>
