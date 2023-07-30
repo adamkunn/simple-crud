@@ -46,7 +46,7 @@ class EmployeeController extends Controller
     }
     
     public function updatedata(Request $request, $id)
-{
+ {
     $data = Employee::find($id);
     $data->update($request->except('foto'));
 
@@ -71,7 +71,7 @@ class EmployeeController extends Controller
     public function deletedata ($id) {
         $data = Employee::find($id);
         $data->delete();
-        return redirect()->route('pegawai')->with('success', 'Data berhasil di hapus');
+        return redirect()->route('pegawai')->with('success', 'Data berhasil dihapus');
     }
 
 
