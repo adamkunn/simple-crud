@@ -19,7 +19,7 @@
         <a href="/tambahpegawai" type="button" class="btn btn-success">Tambah Data +</a>
         <div class="row">
             @if ($message = Session::get('success'))
-            <div class="alert alert-success" role="alert">
+            <div class="alert alert-success mt-4 mb-4" role="alert">
               {{$message}}
               </div>
             @endif
@@ -35,17 +35,20 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @php
+                        $no = 1;
+                    @endphp
                     @foreach ($data as $item)
                     <tr>
-                        <th scope="item">{{$item->id}}</th>
+                        <th scope="item">{{$no++}}</th>
                         <td>{{$item->nama}}</td> 
                         <td>{{$item->jeniskelamin}}</td>
                         <td>{{$item->notelpon}}</td>
                         <td>{{$item->created_at->format('D M Y')}}</td>
                         {{-- ->diffForHumans() --}}
                         <td>
-                            <button type="button" class="btn btn-danger">Delete</button>
-                            <button type="button" class="btn btn-info">Edit</button>
+                            <a href="/tampilkandata/{{$item->id}}" class="btn btn-info">Edit</a>
+                            <a href="/deletedata/{{$item->id}}" class="btn btn-danger">Delete</a>
                         </td>
                     </tr>
                     @endforeach

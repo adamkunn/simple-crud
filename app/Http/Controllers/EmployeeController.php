@@ -26,4 +26,26 @@ class EmployeeController extends Controller
         Employee::create($request->all());
         return redirect()->route('pegawai')->with('success', 'Data Berhasil Di Tambahkan');
     }
+
+    public function tampilkandata ($id) {
+        $data = Employee::find($id);
+        // dd($data);
+
+        return view('tampildata', compact('data'));
+    }
+
+    public function updatedata (Request $request, $id){
+        $data = Employee::find($id);
+        $data->update($request->all());
+
+    return redirect()->route('pegawai')->with('success', 'Data berhasil di Update');
+    }
+
+    public function deletedata ($id) {
+        $data = Employee::find($id);
+        $data->delete();
+        return redirect()->route('pegawai')->with('success', 'Data berhasil di hapus');
+    }
+
+    
 }
