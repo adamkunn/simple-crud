@@ -28,6 +28,7 @@
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Nama</th>
+                        <th scope="col">Foto</th>
                         <th scope="col">Jenis Kelamin</th>
                         <th scope="col">No Telpon</th>
                         <th scope="col">Dibuat</th>
@@ -42,8 +43,11 @@
                     <tr>
                         <th scope="item">{{$no++}}</th>
                         <td>{{$item->nama}}</td> 
+                        <td>
+                            <img src="{{asset('fotopegawai/'.$item->foto)}}" alt="fotopegawai" style="width: 40px;">
+                        </td> 
                         <td>{{$item->jeniskelamin}}</td>
-                        <td>{{$item->notelpon}}</td>
+                        <td>0{{$item->notelpon}}</td>
                         <td>{{$item->created_at->format('D M Y')}}</td>
                         {{-- ->diffForHumans() --}}
                         <td>

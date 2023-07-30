@@ -20,6 +20,15 @@
             <div class="col-8">
                 <div class="card">
                     <div class="card-body">
+                        @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                         <form action="/insertdata" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="mb-3">
@@ -39,6 +48,10 @@
                                 <label for="exampleInputEmail1" class="form-label">No Telpon</label>
                                 <input type="number" name="notelpon" class="form-control" id="exampleInputEmail1"
                                     aria-describedby="emailHelp">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Masukkan Gambar</label>
+                                <input type="file" name="foto" class="form-control">
                             </div>
                             
                             <button type="submit" class="btn btn-primary">Submit</button>
